@@ -1,6 +1,8 @@
-text named Hello
-text named Goodby
-text named Raku
-dropdown named Train values STOCKHOLM,GÖTEBORG,UPPSALA,ÖREBRO,NYKÖPING
-text named Nonsense
-button named Clickbait
+button named Menu
+information Welcome, book your train tickets here! fill in the form to book tickets.
+text named First_name
+text named Surname
+text named Telephone_number
+dropdown named Train_from values STOCKHOLM,GÖTEBORG,UPPSALA,ÖREBRO,NYKÖPING
+dropdown named Train_to values STOCKHOLM,GÖTEBORG,UPPSALA,ÖREBRO,NYKÖPING
+button named Book_ticket

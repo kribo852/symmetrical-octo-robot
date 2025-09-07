@@ -1,5 +1,5 @@
 my grammar Rules {
-	rule TOP { <typeandname> <namedvaluelist>? <initialvalue>? <visibility>? }
+	rule TOP { (<typeandname> <namedvaluelist>? <initialvalue>? <visibility>?) | 'information'\s?<information> }
 	rule typeandname { <type> 'named' <name> }
 	token type { text | dropdown | radio | button }
 	token name { \w+ }
@@ -8,12 +8,13 @@ my grammar Rules {
 	token value { \w+ }
 	token initialvalue { 'initial value'\s?\w+ }
 	rule visibility { 'if' }
+	rule information { .* }
 }
 
 my $output = "
 <html>"
-~'<style>input{width: 35%; margin: auto;}select{width: 35%; margin: auto;}</style>'~
-"<body>";
+~'<style>input{width: 100%;}div{width: 35%;margin: auto;}select{width: 100%;}button{width: 100%;}</style>'~
+"<body><div>";
 
 class OutputParser {
 
@@ -32,6 +33,10 @@ class OutputParser {
     		%facts{'values'} = Array.new;
     	} 
     	%facts{'values'}.push($value);
+    }
+
+    method information($information) {
+    	%facts{'information'} = $information;
     }
 
     method getValue($key) {
@@ -63,9 +68,11 @@ sub MAIN($input_filename) {
   		$output ~= "</select><br>";
 		}
 
-		$output ~="<button>{$outputparser.getValue('name')}</button>" if $outputparser.getValue('type') eq 'button';				
+		$output ~="<button>{$outputparser.getValue('name')}</button>" if $outputparser.getValue('type') eq 'button';
+
+		$output ~="<p>{$outputparser.getValue('information')}</p>" if $outputparser.getValue('information');				
 	}
 
-	"output.html".IO.spurt: $output ~ '</body>';
+	"output.html".IO.spurt: $output ~ '</div></body>';
 } 
 
