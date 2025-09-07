@@ -1,0 +1,6 @@
+text named Hello
+text named Goodby
+text named Raku
+dropdown named Train values STOCKHOLM,GÖTEBORG,UPPSALA,ÖREBRO,NYKÖPING
+text named Nonsense
+button named Clickbait

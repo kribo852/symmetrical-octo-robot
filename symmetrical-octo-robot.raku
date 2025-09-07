@@ -1,9 +1,11 @@
 my grammar Rules {
-	rule TOP { <typeandname> <valuelist>? <initialvalue>? <visibility>? }
+	rule TOP { <typeandname> <namedvaluelist>? <initialvalue>? <visibility>? }
 	rule typeandname { <type> 'named' <name> }
-	token type { text | dropdown | radio }
+	token type { text | dropdown | radio | button }
 	token name { \w+ }
-	rule valuelist { \w+ | \w+','<valuelist> }
+	rule namedvaluelist { 'values'\s?<valuelist> }
+	rule valuelist { <value> | <value>','<valuelist> }
+	token value { \w+ }
 	token initialvalue { 'initial value'\s?\w+ }
 	rule visibility { 'if' }
 }
@@ -25,15 +27,22 @@ class OutputParser {
     	%facts{'name'} = $name.trim();
     }
 
+    method value ($value) {
+    	unless %facts{'values'} {
+    		%facts{'values'} = Array.new;
+    	} 
+    	%facts{'values'}.push($value);
+    }
+
     method getValue($key) {
     	return %facts{$key};
     }
 } 
 
 
-sub MAIN() {
+sub MAIN($input_filename) {
 
-	my $prototypespec = "text named Hello\ntext named Goodby\ntext named Raku\ndropdown named Car\ntext named Nonsense";
+	my $prototypespec = $input_filename.IO.slurp();
 
 	my @splitlist = $prototypespec.split("\n");
 	for @splitlist -> $line {
@@ -45,12 +54,16 @@ sub MAIN() {
 
 		$output ~= "<input><br>" if $outputparser.getValue('type') eq 'text';
 
-    	$output ~= "<select name=\"cars\" id=\"cars\">
-  					<option value=\"volvo\">Volvo</option>
-  					<option value=\"saab\">Saab</option>
-  					<option value=\"mercedes\">Mercedes</option>
-  					<option value=\"Audi\">Hej</option>
-					</select><br>" if $outputparser.getValue('type') eq 'dropdown';	
+		if $outputparser.getValue('type') eq 'dropdown' {
+    	$output ~= "<select name=\"{$outputparser.getValue('name')}\">";
+ 			for |$outputparser.getValue('values') -> $value {
+ 				$output ~= "<option value=\"{$value}\">{$value}</option>"
+ 			}					
+  		
+  		$output ~= "</select><br>";
+		}
+
+		$output ~="<button>{$outputparser.getValue('name')}</button>" if $outputparser.getValue('type') eq 'button';				
 	}
 
 	"output.html".IO.spurt: $output ~ '</body>';
