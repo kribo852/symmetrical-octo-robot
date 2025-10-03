@@ -8,3 +8,7 @@ The inputspec.txt is read line by line, and inserted into the output page.
 
 **Run with**
 `rakudo symmetrical-octo-robot.raku inputspec.txt`
+
+
+**Logotype**
+The logotype was generated with the perchance AI.
