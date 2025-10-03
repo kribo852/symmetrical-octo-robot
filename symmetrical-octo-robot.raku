@@ -1,20 +1,23 @@
 my grammar Rules {
-	rule TOP { (<typeandname> <namedvaluelist>? <initialvalue>? <visibility>?) | 'information'\s?<information> | 'image' <imagefilename> }
+	rule TOP { <button> | (<typeandname> <namedvaluelist>?) | 'information named'\s?<name>\s?<information> | 'image named'\s?<name>\s?<imagefilename> }
 	rule typeandname { <type> 'named' <name> }
-	token type { text | dropdown | radio | button | date }
+	token type { text | dropdown | radio | date }
+	rule button { 'button named'\s?<name>\s?<toggle>? }
 	token name { \w+ }
 	rule namedvaluelist { 'values'\s?<valuelist> }
 	rule valuelist { <value> | <value>','<valuelist> }
 	token value { \w+ }
-	token initialvalue { 'initial value'\s?\w+ }
-	rule visibility { 'if' }
-	rule information { .* }
-	rule imagefilename { .* }
+	token information { .* }
+	token imagefilename { .* }
+	rule toggle {'toggle'\s?<toggle_name> }
+	token toggle_name { \w+ }
 }
 
-my $output = "<html>"
-~'<style>input{width: 100%;}div{width: 35%;margin: auto;}select{width: 100%;}button{width: 100%;}</style>'~
-"<body><div>\n";
+constant $stylesheet = '<style>input{width: 100%;}.checkbox{width: auto;}.main{width: 45%;margin: auto;}select{width: 100%;}button{width: 100%;}p.forinput{margin-bottom:3px;}img{margin-top: 5px;margin-bottom: 5px;width: 100%;}</style>';
+
+my $output = "<html><style></style><body><div class='main'>\n";
+
+my $accumulated_scripts = "";
 
 class OutputParser {
 
@@ -22,6 +25,10 @@ class OutputParser {
     
     method type ($type) { 
     	%facts{'type'} = $type.trim();
+    }
+
+    method button($ignore) {
+    	%facts{'type'} = 'button';
     }
 
     method name ($name) { 
@@ -43,6 +50,11 @@ class OutputParser {
     	%facts{'imagefilename'} = $imagefilename;
     }
 
+    method toggle_name($element_hide_name) {
+    	say $element_hide_name;
+    	%facts{'toggle_name'} = $element_hide_name;
+    }
+
     method getValue($key) {
     	return %facts{$key};
     }
@@ -62,19 +74,22 @@ sub MAIN($input_filename) {
 		add_input_of_type($outputparser);
 
 		with $outputparser.getValue('imagefilename') {
-			$output ~="<image src='{$outputparser.getValue('imagefilename')}'></image>\n"	
+			$output ~="<img id='{$outputparser.getValue('name')}' src='{$outputparser.getValue('imagefilename')}'></img>\n"	
 		}
 
-		$output ~="<p>{$outputparser.getValue('information')}</p>\n" if $outputparser.getValue('information');				
+		$output ~="<p id='{$outputparser.getValue('name')}'>{$outputparser.getValue('information')}</p>\n" if $outputparser.getValue('information');				
 	}
+	$output ~= '</div></body>';
+	$output ~= '<script>' ~ $accumulated_scripts ~ '</script>';
+	replace_style($stylesheet);
 
-	"output.html".IO.spurt: $output ~ '</div></body>';
+	"output.html".IO.spurt: $output;
 } 
 
 sub add_input_of_type($outputparser) {
 	with $outputparser.getValue('type') {
-		$output ~= "<p>{$outputparser.getValue('name')}</p>\n" if $outputparser.getValue('name'); #title
-		$output ~= "<input><br>\n" if $outputparser.getValue('type') eq 'text';
+		$output ~= "<div id='{$outputparser.getValue('name')}'><p class='forinput'>{$outputparser.getValue('name')}</p>\n" if $outputparser.getValue('name'); #title
+		$output ~= "<input>" if $outputparser.getValue('type') eq 'text';
 
 		if $outputparser.getValue('type') eq 'dropdown' {
     	$output ~= "<select name=\"{$outputparser.getValue('name')}\">";
@@ -82,11 +97,54 @@ sub add_input_of_type($outputparser) {
  				$output ~= "<option value=\"{$value}\">{$value}</option>\n"
  			}					
   		
-  		$output ~= "</select><br>\n";
+  		$output ~= "</select>";
 		}
 
-		$output ~="<button>{$outputparser.getValue('name')}</button>\n" if $outputparser.getValue('type') eq 'button';
+		if $outputparser.getValue('type') eq 'button' {
+			with $outputparser.getValue('toggle_name') {
+				my $toggle_function_name = 'toggle' ~ $outputparser.getValue('name');	
 
-		$output ~= "<input type='date'><br>\n" if $outputparser.getValue('type') eq 'date';
+				$output ~="<button onclick='{$toggle_function_name}()'>{$outputparser.getValue('name')}</button>" if $outputparser.getValue('type') eq 'button';	
+
+				$accumulated_scripts ~= make_toggle_function($toggle_function_name, $outputparser.getValue('toggle_name'));
+			} 
+			without $outputparser.getValue('toggle_name') {
+				$output ~="<button>{$outputparser.getValue('name')}</button>" if $outputparser.getValue('type') eq 'button';
+			}
+		}
+
+
+		$output ~= "<input type='date'>" if $outputparser.getValue('type') eq 'date';
+
+		add_radios($outputparser.getValue('name'), $outputparser.getValue('values')) if $outputparser.getValue('type') eq 'radio';
+
+		$output ~= "</div>\n"
 	}
 }
+
+sub add_radios($input_name, @options) {
+	for @options -> $button_value {
+ 		$output ~= "<input type='radio' id='{$button_value}' name='{$input_name}' value='{$button_value}' class='checkbox'>";
+		$output ~= "<label for='{$button_value}'>{$button_value}</label>\n";
+ 	}	
+}
+
+sub make_toggle_function($function_name, $element_hide_name) {
+	return '
+	function '~$function_name~'() { var x = document.getElementById("'~$element_hide_name~'");
+  		if (x.style.display === "none") {
+    		x.style.display = "block";
+  		} else {
+    		x.style.display = "none";
+		}
+	}
+';
+}
+
+
+sub replace_style($replacement) {
+	my Match $match = $output.match("<style></style>");
+	$output = $match.replace-with("\n" ~ $replacement ~ "\n");
+}
+
+

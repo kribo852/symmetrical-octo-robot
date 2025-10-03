@@ -1,10 +1,13 @@
-image logo.png
-button named Menu
-information Welcome, book your train tickets here! fill in the form to book tickets.
+image named logo logo.jpeg
+button named Menu toggle menuinf
+information named menuinf This is information toggled with the Menu button
+information named welcome Welcome, book your train tickets here! fill in the form to book tickets.
 text named First_name
 text named Surname
 text named Telephone_number
 dropdown named Train_from values STOCKHOLM,UPPSALA,ÖREBRO,NYKÖPING,KUMLA,SÖDERTÄLJE,HALLSBERG,ESKILSTUNA
 dropdown named Train_to values STOCKHOLM,UPPSALA,ÖREBRO,NYKÖPING,KUMLA,SÖDERTÄLJE,HALLSBERG,ESKILSTUNA
 date named Departure
+radio named Class values FIRST_CLASS,QUIET_CLASS,SECOND_CLASS
 button named Book_ticket
+image named logo2 logo.jpeg

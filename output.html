@@ -1,15 +1,18 @@
-<html><style>input{width: 100%;}div{width: 35%;margin: auto;}select{width: 100%;}button{width: 100%;}</style><body><div>
-<image src='logo.png'></image>
-<p>Menu</p>
-<button>Menu</button>
-<p>Welcome, book your train tickets here! fill in the form to book tickets.</p>
-<p>First_name</p>
-<input><br>
-<p>Surname</p>
-<input><br>
-<p>Telephone_number</p>
-<input><br>
-<p>Train_from</p>
+<html>
+<style>input{width: 100%;}.checkbox{width: auto;}.main{width: 45%;margin: auto;}select{width: 100%;}button{width: 100%;}p.forinput{margin-bottom:3px;}img{margin-top: 5px;margin-bottom: 5px;width: 100%;}</style>
+<body><div class='main'>
+<img id='logo' src='logo.jpeg'></img>
+<div id='Menu'><p class='forinput'>Menu</p>
+<button onclick='toggleMenu()'>Menu</button></div>
+<p id='menuinf'>This is information toggled with the Menu button</p>
+<p id='welcome'>Welcome, book your train tickets here! fill in the form to book tickets.</p>
+<div id='First_name'><p class='forinput'>First_name</p>
+<input></div>
+<div id='Surname'><p class='forinput'>Surname</p>
+<input></div>
+<div id='Telephone_number'><p class='forinput'>Telephone_number</p>
+<input></div>
+<div id='Train_from'><p class='forinput'>Train_from</p>
 <select name="Train_from"><option value="STOCKHOLM">STOCKHOLM</option>
 <option value="UPPSALA">UPPSALA</option>
 <option value="ÖREBRO">ÖREBRO</option>
@@ -18,8 +21,8 @@
 <option value="SÖDERTÄLJE">SÖDERTÄLJE</option>
 <option value="HALLSBERG">HALLSBERG</option>
 <option value="ESKILSTUNA">ESKILSTUNA</option>
-</select><br>
-<p>Train_to</p>
+</select></div>
+<div id='Train_to'><p class='forinput'>Train_to</p>
 <select name="Train_to"><option value="STOCKHOLM">STOCKHOLM</option>
 <option value="UPPSALA">UPPSALA</option>
 <option value="ÖREBRO">ÖREBRO</option>
@@ -28,9 +31,23 @@
 <option value="SÖDERTÄLJE">SÖDERTÄLJE</option>
 <option value="HALLSBERG">HALLSBERG</option>
 <option value="ESKILSTUNA">ESKILSTUNA</option>
-</select><br>
-<p>Departure</p>
-<input type='date'><br>
-<p>Book_ticket</p>
-<button>Book_ticket</button>
-</div></body>
+</select></div>
+<div id='Departure'><p class='forinput'>Departure</p>
+<input type='date'></div>
+<div id='Class'><p class='forinput'>Class</p>
+<input type='radio' id='FIRST_CLASS' name='Class' value='FIRST_CLASS' class='checkbox'><label for='FIRST_CLASS'>FIRST_CLASS</label>
+<input type='radio' id='QUIET_CLASS' name='Class' value='QUIET_CLASS' class='checkbox'><label for='QUIET_CLASS'>QUIET_CLASS</label>
+<input type='radio' id='SECOND_CLASS' name='Class' value='SECOND_CLASS' class='checkbox'><label for='SECOND_CLASS'>SECOND_CLASS</label>
+</div>
+<div id='Book_ticket'><p class='forinput'>Book_ticket</p>
+<button>Book_ticket</button></div>
+<img id='logo2' src='logo.jpeg'></img>
+</div></body><script>
+	function toggleMenu() { var x = document.getElementById("menuinf");
+  		if (x.style.display === "none") {
+    		x.style.display = "block";
+  		} else {
+    		x.style.display = "none";
+		}
+	}
+</script>
