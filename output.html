@@ -1,10 +1,12 @@
-<html>
+<!doctype html><html>
 <style>input{width: 100%;}.checkbox{width: auto;}.main{width: 45%;margin: auto;}select{width: 100%;}button{width: 100%;}p.forinput{margin-bottom:3px;}img{margin-top: 5px;margin-bottom: 5px;width: 100%;}</style>
 <body><div class='main'>
-<img id='logo' src='logo.jpeg'></img>
 <div id='Menu'><p class='forinput'>Menu</p>
 <button onclick='toggleMenu()'>Menu</button></div>
-<p id='menuinf'>This is information toggled with the Menu button</p>
+<div id='logout'><p class='forinput'>logout</p>
+<button>logout</button></div>
+<p id='menuinf'>You can call our customer service at number 123456789 </p>
+<img id='logo' src='logo.jpeg'></img>
 <p id='welcome'>Welcome, book your train tickets here! fill in the form to book tickets.</p>
 <div id='First_name'><p class='forinput'>First_name</p>
 <input></div>
@@ -39,15 +41,34 @@
 <input type='radio' id='QUIET_CLASS' name='Class' value='QUIET_CLASS' class='checkbox'><label for='QUIET_CLASS'>QUIET_CLASS</label>
 <input type='radio' id='SECOND_CLASS' name='Class' value='SECOND_CLASS' class='checkbox'><label for='SECOND_CLASS'>SECOND_CLASS</label>
 </div>
+<img id='bookedlogo' src='booked.jpeg'></img>
+<p id='bookedinfo'>Your tickets are booked</p>
 <div id='Book_ticket'><p class='forinput'>Book_ticket</p>
-<button>Book_ticket</button></div>
-<img id='logo2' src='logo.jpeg'></img>
+<button onclick='toggleBook_ticket()'>Book_ticket</button></div>
 </div></body><script>
-	function toggleMenu() { var x = document.getElementById("menuinf");
-  		if (x.style.display === "none") {
-    		x.style.display = "block";
-  		} else {
-    		x.style.display = "none";
+	function toggleMenu() { 
+		for (id of ["menuinf","logout"]) {
+			var x = document.getElementById(id);
+  			if (x.style.display === "none") {
+    			x.style.display = "block";
+  			} else {
+    			x.style.display = "none";
+			}
 		}
 	}
+	toggleMenu();
+
+
+	function toggleBook_ticket() { 
+		for (id of ["bookedlogo","bookedinfo"]) {
+			var x = document.getElementById(id);
+  			if (x.style.display === "none") {
+    			x.style.display = "block";
+  			} else {
+    			x.style.display = "none";
+			}
+		}
+	}
+	toggleBook_ticket();
+
 </script>

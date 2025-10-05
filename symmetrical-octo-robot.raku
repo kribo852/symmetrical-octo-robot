@@ -1,5 +1,5 @@
 my grammar Rules {
-	rule TOP { <button> | (<typeandname> <namedvaluelist>?) | 'information named'\s?<name>\s?<information> | 'image named'\s?<name>\s?<imagefilename> }
+	rule TOP { (<typeandname> <namedvaluelist>?) | <button> | comment | 'information named'\s?<name>\s?<information> | 'image named'\s?<name>\s?<imagefilename> | 'heading named'\s?<name>\s?<heading> }
 	rule typeandname { <type> 'named' <name> }
 	token type { text | dropdown | radio | date }
 	rule button { 'button named'\s?<name>\s?<toggle>? }
@@ -9,13 +9,15 @@ my grammar Rules {
 	token value { \w+ }
 	token information { .* }
 	token imagefilename { .* }
-	rule toggle {'toggle'\s?<toggle_name> }
-	token toggle_name { \w+ }
+	token heading { .* }
+	rule toggle {'toggle'\s?<toggle_elements> }
+	token toggle_elements { [\w+','?]+ }
+	rule comment { '#'.* }
 }
 
 constant $stylesheet = '<style>input{width: 100%;}.checkbox{width: auto;}.main{width: 45%;margin: auto;}select{width: 100%;}button{width: 100%;}p.forinput{margin-bottom:3px;}img{margin-top: 5px;margin-bottom: 5px;width: 100%;}</style>';
 
-my $output = "<html><style></style><body><div class='main'>\n";
+my $output = "<!doctype html><html><style></style><body><div class='main'>\n";
 
 my $accumulated_scripts = "";
 
@@ -50,9 +52,13 @@ class OutputParser {
     	%facts{'imagefilename'} = $imagefilename;
     }
 
-    method toggle_name($element_hide_name) {
-    	say $element_hide_name;
-    	%facts{'toggle_name'} = $element_hide_name;
+    method toggle_elements($elements_hide_name) {
+    	say $elements_hide_name;
+    	%facts{'toggle_elements'} = $elements_hide_name;
+    }
+
+    method heading($information) {
+    	%facts{'heading'} = $information;
     }
 
     method getValue($key) {
@@ -78,6 +84,7 @@ sub MAIN($input_filename) {
 		}
 
 		$output ~="<p id='{$outputparser.getValue('name')}'>{$outputparser.getValue('information')}</p>\n" if $outputparser.getValue('information');				
+		$output ~="<h1 id='{$outputparser.getValue('name')}'>{$outputparser.getValue('heading')}</h1>\n" if $outputparser.getValue('heading');				
 	}
 	$output ~= '</div></body>';
 	$output ~= '<script>' ~ $accumulated_scripts ~ '</script>';
@@ -100,19 +107,7 @@ sub add_input_of_type($outputparser) {
   		$output ~= "</select>";
 		}
 
-		if $outputparser.getValue('type') eq 'button' {
-			with $outputparser.getValue('toggle_name') {
-				my $toggle_function_name = 'toggle' ~ $outputparser.getValue('name');	
-
-				$output ~="<button onclick='{$toggle_function_name}()'>{$outputparser.getValue('name')}</button>" if $outputparser.getValue('type') eq 'button';	
-
-				$accumulated_scripts ~= make_toggle_function($toggle_function_name, $outputparser.getValue('toggle_name'));
-			} 
-			without $outputparser.getValue('toggle_name') {
-				$output ~="<button>{$outputparser.getValue('name')}</button>" if $outputparser.getValue('type') eq 'button';
-			}
-		}
-
+		add_button($outputparser);	
 
 		$output ~= "<input type='date'>" if $outputparser.getValue('type') eq 'date';
 
@@ -129,15 +124,37 @@ sub add_radios($input_name, @options) {
  	}	
 }
 
-sub make_toggle_function($function_name, $element_hide_name) {
-	return '
-	function '~$function_name~'() { var x = document.getElementById("'~$element_hide_name~'");
-  		if (x.style.display === "none") {
-    		x.style.display = "block";
-  		} else {
-    		x.style.display = "none";
+sub add_button($outputparser) {
+	if $outputparser.getValue('type') eq 'button' {
+		with $outputparser.getValue('toggle_elements') {
+			my $toggle_function_name = 'toggle' ~ $outputparser.getValue('name');	
+
+			$output ~="<button onclick='{$toggle_function_name}()'>{$outputparser.getValue('name')}</button>" if $outputparser.getValue('type') eq 'button';	
+
+			$accumulated_scripts ~= make_toggle_function($toggle_function_name, $outputparser.getValue('toggle_elements'));
+		} 
+		without $outputparser.getValue('toggle_elements') {
+			$output ~="<button>{$outputparser.getValue('name')}</button>" if $outputparser.getValue('type') eq 'button';
 		}
 	}
+}
+
+sub make_toggle_function($function_name, $elements_hide_name) {
+	my $make_javascript_array = "[\"" ~ $elements_hide_name.subst(",", "\",\"", :g) ~ "\"]";
+
+	return '
+	function '~$function_name~'() { 
+		for (id of '~ $make_javascript_array ~') {
+			var x = document.getElementById(id);
+  			if (x.style.display === "none") {
+    			x.style.display = "block";
+  			} else {
+    			x.style.display = "none";
+			}
+		}
+	}
+	'~$function_name~'();
+
 ';
 }
 
