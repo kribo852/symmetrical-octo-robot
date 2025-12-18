@@ -1,0 +1,14 @@
+{
+  "name": "symmetrical-octo-robot",
+  "version": "1.0.0",
+  "description": "A project for making small web prototypes",
+  "main": "run-robot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kribo",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^25.0.2"
+  }
+}

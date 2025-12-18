@@ -1,74 +1,22 @@
-<!doctype html><html>
-<style>input{width: 100%;}.checkbox{width: auto;}.main{width: 45%;margin: auto;}select{width: 100%;}button{width: 100%;}p.forinput{margin-bottom:3px;}img{margin-top: 5px;margin-bottom: 5px;width: 100%;}</style>
-<body><div class='main'>
-<div id='Menu'><p class='forinput'>Menu</p>
-<button onclick='toggleMenu()'>Menu</button></div>
-<div id='logout'><p class='forinput'>logout</p>
-<button>logout</button></div>
-<p id='menuinf'>You can call our customer service at number 123456789 </p>
-<img id='logo' src='logo.jpeg'></img>
-<p id='welcome'>Welcome, book your train tickets here! fill in the form to book tickets.</p>
-<div id='First_name'><p class='forinput'>First_name</p>
-<input></div>
-<div id='Surname'><p class='forinput'>Surname</p>
-<input></div>
-<div id='Telephone_number'><p class='forinput'>Telephone_number</p>
-<input></div>
-<div id='Train_from'><p class='forinput'>Train_from</p>
-<select name="Train_from"><option value="STOCKHOLM">STOCKHOLM</option>
-<option value="UPPSALA">UPPSALA</option>
-<option value="ÖREBRO">ÖREBRO</option>
-<option value="NYKÖPING">NYKÖPING</option>
-<option value="KUMLA">KUMLA</option>
-<option value="SÖDERTÄLJE">SÖDERTÄLJE</option>
-<option value="HALLSBERG">HALLSBERG</option>
-<option value="ESKILSTUNA">ESKILSTUNA</option>
-</select></div>
-<div id='Train_to'><p class='forinput'>Train_to</p>
-<select name="Train_to"><option value="STOCKHOLM">STOCKHOLM</option>
-<option value="UPPSALA">UPPSALA</option>
-<option value="ÖREBRO">ÖREBRO</option>
-<option value="NYKÖPING">NYKÖPING</option>
-<option value="KUMLA">KUMLA</option>
-<option value="SÖDERTÄLJE">SÖDERTÄLJE</option>
-<option value="HALLSBERG">HALLSBERG</option>
-<option value="ESKILSTUNA">ESKILSTUNA</option>
-</select></div>
-<div id='Departure'><p class='forinput'>Departure</p>
-<input type='date'></div>
-<div id='Class'><p class='forinput'>Class</p>
-<input type='radio' id='FIRST_CLASS' name='Class' value='FIRST_CLASS' class='checkbox'><label for='FIRST_CLASS'>FIRST_CLASS</label>
-<input type='radio' id='QUIET_CLASS' name='Class' value='QUIET_CLASS' class='checkbox'><label for='QUIET_CLASS'>QUIET_CLASS</label>
-<input type='radio' id='SECOND_CLASS' name='Class' value='SECOND_CLASS' class='checkbox'><label for='SECOND_CLASS'>SECOND_CLASS</label>
-</div>
-<img id='bookedlogo' src='booked.jpeg'></img>
-<p id='bookedinfo'>Your tickets are booked</p>
-<div id='Book_ticket'><p class='forinput'>Book_ticket</p>
-<button onclick='toggleBook_ticket()'>Book_ticket</button></div>
-</div></body><script>
-	function toggleMenu() { 
-		for (id of ["menuinf","logout"]) {
-			var x = document.getElementById(id);
-  			if (x.style.display === "none") {
-    			x.style.display = "block";
-  			} else {
-    			x.style.display = "none";
-			}
+<!doctype html><html><style>
+		.container { 
+			display: flex;
+			height: auto;
 		}
-	}
-	toggleMenu();
-
-
-	function toggleBook_ticket() { 
-		for (id of ["bookedlogo","bookedinfo"]) {
-			var x = document.getElementById(id);
-  			if (x.style.display === "none") {
-    			x.style.display = "block";
-  			} else {
-    			x.style.display = "none";
-			}
+		div.item {
+			width: 100%;
+			background-color: rgb(215,215,255);
+			border-right: 1px solid grey;
+			border-bottom: 1px solid grey;
+			text-align: center;
 		}
-	}
-	toggleBook_ticket();
-
-</script>
+		p.forinput{
+			margin-top:2px;
+			margin-bottom:2px;
+		}
+		input {
+			margin-bottom:2px;
+		}
+		body {
+			background-color: rgb(225,220,215);
+		}</style><body><div class="container"><div class="item"><p class="forinput">sign up for buying a near as new car!</p></div></div><div class="container"><div class="item"><div><p class="forinput">enter your first name</p><input></div></div><div class="item"><div><p class="forinput">enter your last name</p><input></div></div><div class="item"><div><p class="forinput">enter your phone number</p><input></div></div></div><div class="container"><div class="item"><p class="forinput">other crazy offers here, or call +5436 1122334455678912367543345435243267</p></div></div></body></html>

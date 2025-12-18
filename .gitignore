@@ -1,7 +1,4 @@
-# Gitignore for Raku (https://raku.org)
-# As part of https://github.com/github/gitignore
+/node_modules/
+structure.pu
 
-# precompiled files
-.precomp
-lib/.precomp
 

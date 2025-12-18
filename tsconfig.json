@@ -1,0 +1,10 @@
+{
+    "files": [
+    "run-robot.ts",
+    ],
+    "compilerOptions": {
+        "target": "es2022",
+        "moduleResolution": "nodenext",
+        "module": "nodenext"
+    }
+}
