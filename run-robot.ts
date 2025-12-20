@@ -43,7 +43,9 @@ let content = [
 	{
 		type: "information",
 		name: "information",
-		description: "bla bla bla bla bla bla"
+		description: `Buy a real great deal of a car! Our cars have prooven themselves
+		for thousands of miles, but they still have more to give! Full of surprises, buy them
+		today!!`
 	},
 	{
 		type: "information",

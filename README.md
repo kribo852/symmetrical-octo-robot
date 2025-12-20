@@ -15,8 +15,8 @@
 
 ## Usage
 
-- compile the typescript code to javascript with "npm compile-source"
-- create the output html file by running "npm create-html-page" 
+- compile the typescript code to javascript with "npm run compile-source"
+- create the output html file by running "npm run create-html-page" 
 
 ### The input specification
 
