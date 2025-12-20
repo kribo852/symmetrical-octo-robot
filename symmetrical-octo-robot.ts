@@ -82,6 +82,10 @@ class GridNode implements TreeNode {
 		this.startswith = "";
 		this.endswith = "";
 		this.elements = new Map<string,ElementNode>();
+		let emptyElementNode = new ElementNode();
+		emptyElementNode.add({type: "empty"});
+		this.elements.set("", emptyElementNode);
+		console.log(emptyElementNode);
 	}
 
 	get output(): string {
@@ -106,7 +110,7 @@ class GridNode implements TreeNode {
 	add(json: any) {
 		if(json.type == "layout") {
 			this.grid = json.grid;
-			return
+			return;
 		}
 
 
@@ -135,6 +139,14 @@ class ElementNode implements TreeNode {
     	}
     	if (json.type == "information") {
     		this.contained = new InformationNode();
+    		this.contained.add(json);
+    	}
+    	if (json.type == "heading") {
+    		this.contained = new HeadingNode();
+    		this.contained.add(json);
+    	}
+    	if (json.type == "empty") {
+    		this.contained = new EmptyNode();
     		this.contained.add(json);
     	}
     }
@@ -190,5 +202,41 @@ class InformationNode implements TreeNode {
 
 }
 
+class HeadingNode implements TreeNode {
+	startswith: string;
+	endswith: string;
 
+
+	constructor() {
+    	this.startswith = `<h1 class="forinput">`;
+    	this.endswith = `</h1>`;
+    }
+
+    add(json: any) {
+    	this.startswith += json.description;
+    }
+
+    get output(): string {
+    	return this.startswith + this.endswith;
+    }
+
+}
+
+class EmptyNode implements TreeNode {
+	startswith: string;
+	endswith: string;
+
+
+	constructor() {
+    	this.startswith = ``;
+    	this.endswith = ``;
+    }
+
+    add(json: any) {}
+
+    get output(): string {
+    	return this.startswith + this.endswith;
+    }
+
+}
 

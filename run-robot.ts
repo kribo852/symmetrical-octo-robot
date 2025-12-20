@@ -8,7 +8,10 @@ let grid = {
 	type: "layout",
 	grid: [
 		["", "heading", ""],
-		["first_name last_name telephone"],
+		["information"],
+		["", "first_name", ""],
+		["", "last_name", ""],
+		["", "telephone", ""],
 		["footer", ""]
 	]
 };
@@ -33,9 +36,14 @@ let content = [
 		description: "enter your phone number" 
 	},
 	{
-		type: "information",
+		type: "heading",
 		name: "heading",
 		description: "sign up for buying a near as new car!"
+	},
+	{
+		type: "information",
+		name: "information",
+		description: "bla bla bla bla bla bla"
 	},
 	{
 		type: "information",
