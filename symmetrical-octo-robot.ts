@@ -133,21 +133,27 @@ class ElementNode implements TreeNode {
     }
 
     add(json: any) {
-    	if (json.type == "input_text") {
-    		this.contained = new InputTextNode();
-    		this.contained.add(json);
-    	}
-    	if (json.type == "information") {
-    		this.contained = new InformationNode();
-    		this.contained.add(json);
-    	}
-    	if (json.type == "heading") {
-    		this.contained = new HeadingNode();
-    		this.contained.add(json);
-    	}
-    	if (json.type == "empty") {
-    		this.contained = new EmptyNode();
-    		this.contained.add(json);
+    	switch (json.type) {
+    		case ("input_text") :
+    			this.contained = new InputTextNode();
+    			this.contained.add(json);
+    		break;
+    		case ("information") :
+    			this.contained = new InformationNode();
+    			this.contained.add(json);
+    		break;
+    		case ("heading") :
+    			this.contained = new HeadingNode();
+    			this.contained.add(json);
+    		break;
+    		case ("empty") :
+    			this.contained = new EmptyNode();
+    			this.contained.add(json);
+    		break;
+    		case ("picture") :
+    			this.contained = new PictureNode();
+    			this.contained.add(json);
+    		break;
     	}
     }
 
@@ -188,7 +194,7 @@ class InformationNode implements TreeNode {
 
 
 	constructor() {
-    	this.startswith = `<p class="forinput">`;
+    	this.startswith = `<p>`;
     	this.endswith = `</p>`;
     }
 
@@ -208,7 +214,7 @@ class HeadingNode implements TreeNode {
 
 
 	constructor() {
-    	this.startswith = `<h1 class="forinput">`;
+    	this.startswith = `<h1>`;
     	this.endswith = `</h1>`;
     }
 
@@ -236,6 +242,27 @@ class EmptyNode implements TreeNode {
 
     get output(): string {
     	return this.startswith + this.endswith;
+    }
+
+}
+
+class PictureNode implements TreeNode {
+	startswith: string;
+	endswith: string;
+	picture_file: string;
+
+
+	constructor() {
+    	this.startswith = `<img src="`;
+    	this.endswith = `">`;
+    }
+
+    add(json: any) {
+    	this.picture_file = json.file;
+    }
+
+    get output(): string {
+    	return this.startswith + this.picture_file + this.endswith;
     }
 
 }

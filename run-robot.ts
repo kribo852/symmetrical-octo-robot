@@ -9,6 +9,7 @@ let grid = {
 	grid: [
 		["", "heading", ""],
 		["information"],
+		["picture"],
 		["", "first_name", ""],
 		["", "last_name", ""],
 		["", "telephone", ""],
@@ -51,13 +52,17 @@ let content = [
 		type: "information",
 		name: "footer",
 		description: "other crazy offers here, or call +5436 1122334455678912367543345435243267"
+	},
+	{
+		type: "picture",
+		name: "picture",
+		file: "rusty_cars.jpeg"
 	}
 ];
 
 for (let index in content) {
 	tree.add(content[index]);
 }
-
 
 
 writeFile("output.html", tree.output,  function(err) {
