@@ -1,64 +1,16 @@
 import {TreeNode, HtmlNode} from './symmetrical-octo-robot.js'
-import { writeFile } from 'fs';
+import { writeFile, readFileSync } from 'fs';
 
+let layout_file_name = process.argv[2];
+let content_file_name = process.argv[3];
 
 let tree = new HtmlNode(); 
 
-let grid = {
-	type: "layout",
-	grid: [
-		["", "heading", ""],
-		["information"],
-		["picture"],
-		["", "first_name", ""],
-		["", "last_name", ""],
-		["", "telephone", ""],
-		["footer", ""]
-	]
-};
+let layout = JSON.parse(readFileSync(layout_file_name, 'utf8'));
 
-tree.add(grid);
+tree.add(layout);
 
-
-let content = [
-	{
-		type: "input_text",
-		name: "first_name",
-		description: "enter your first name" 
-	},
-	{
-		type: "input_text",
-		name: "last_name",
-		description: "enter your last name" 
-	},
-	{
-		type: "input_text",
-		name: "telephone",
-		description: "enter your phone number" 
-	},
-	{
-		type: "heading",
-		name: "heading",
-		description: "sign up for buying a near as new car!"
-	},
-	{
-		type: "information",
-		name: "information",
-		description: `Buy a real great deal of a car! Our cars have prooven themselves
-		for thousands of miles, but they still have more to give! Full of surprises, buy them
-		today!!`
-	},
-	{
-		type: "information",
-		name: "footer",
-		description: "other crazy offers here, or call +5436 1122334455678912367543345435243267"
-	},
-	{
-		type: "picture",
-		name: "picture",
-		file: "rusty_cars.jpeg"
-	}
-];
+let content = JSON.parse(readFileSync(content_file_name, 'utf8'));
 
 for (let index in content) {
 	tree.add(content[index]);

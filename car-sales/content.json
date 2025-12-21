@@ -1,0 +1,37 @@
+[
+	{
+		"type": "input_text",
+		"name": "first_name",
+		"description": "enter your first name" 
+	},
+	{
+		"type": "input_text",
+		"name": "last_name",
+		"description": "enter your last name" 
+	},
+	{
+		"type": "input_text",
+		"name": "telephone",
+		"description": "enter your phone number" 
+	},
+	{
+		"type": "heading",
+		"name": "heading",
+		"description": "sign up for buying a near as new car!"
+	},
+	{
+		"type": "information",
+		"name": "information",
+		"description": "Buy a real great deal of a car! Our cars have prooven themselves for thousands of miles, but they still have more to give! Full of surprises, buy them today!!"
+	},
+	{
+		"type": "information",
+		"name": "footer",
+		"description": "other crazy offers here, or call +5436 1122334455678912367543345435243267"
+	},
+	{
+		"type": "picture",
+		"name": "picture",
+		"file": "car-sales/rusty_cars.jpeg"
+	}
+]

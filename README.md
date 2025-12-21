@@ -30,4 +30,6 @@ By letting layout and elements of the page be separate, and the layout reference
 
 ## Notes
 
+Pictures are created by Perchance AI.
+
 Support a free Palestine 🇵🇸
