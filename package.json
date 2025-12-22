@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile-source": "tsc run-robot.ts",
-    "create-html-page": "node run-robot.js car-sales/layout.json car-sales/content.json"
+    "create-html-page": "node run-robot.js christmas-card/layout.json christmas-card/content.json Kill_Christmas"
   },
   "author": "kribo",
   "license": "MIT",

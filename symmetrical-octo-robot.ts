@@ -15,10 +15,10 @@ export class HtmlNode implements TreeNode {
 	styleNode: StyleNode;
 	gridNode: GridNode;
 
-	constructor() {
+	constructor(style: string) {
 		this.startswith = "<!doctype html><html>";
 		this.endswith = "</html>";
-		this.styleNode = new StyleNode();
+		this.styleNode = new StyleNode(style);
 		this.gridNode = new GridNode();
 	}
 
@@ -32,12 +32,10 @@ export class HtmlNode implements TreeNode {
 
 }
 
-class StyleNode implements TreeNode {
-	startswith: string;
-	endswith: string;
-
-	constructor() {
-		this.startswith = `<style>
+enum Styles {
+	Boring =  `* {
+ 			font-family: 'sans-serif';
+		}
 		.container { 
 			display: flex;
 			height: auto;
@@ -50,21 +48,57 @@ class StyleNode implements TreeNode {
 			text-align: center;
 		}
 		p.forinput{
-			margin-top:2px;
+			margin-top:1rem;
 			margin-bottom:2px;
 		}
 		input {
-			margin-bottom:2px;
+			margin-bottom:1rem;
 		}
 		body {
 			background-color: rgb(225,220,215);
-		}`;
+		}`,
+	Kill_Christmas = `* {
+ 			font-family: 'cursive';
+		}
+		.container { 
+			display: flex;
+			height: auto;
+		}
+		div.item {
+			width: 100%;
+			background-color: rgb(175,50,50);
+			border-right: 1px solid grey;
+			border-bottom: 1px solid grey;
+			text-align: center;
+		}
+		p.forinput{
+			margin-top:1rem;
+			margin-bottom:2px;
+		}
+		input {
+			margin-bottom:1rem;
+		}
+		body {
+			background-color: rgb(25,25,25);
+	}`
+
+
+}
+
+class StyleNode implements TreeNode {
+	startswith: string;
+	endswith: string;
+	style: Styles;
+
+	constructor(style: string) {
+		this.startswith = "<style>";
 		this.endswith = "</style>";
+		this.style = Styles[style];
 	}
 
 
 	get output(): string {
-		return this.startswith + this.endswith;
+		return this.startswith + this.style + this.endswith;
 	}
 
 	add(json: any) {
@@ -85,7 +119,6 @@ class GridNode implements TreeNode {
 		let emptyElementNode = new ElementNode();
 		emptyElementNode.add({type: "empty"});
 		this.elements.set("", emptyElementNode);
-		console.log(emptyElementNode);
 	}
 
 	get output(): string {
@@ -94,12 +127,14 @@ class GridNode implements TreeNode {
 
 		for (let row_index in this.grid) {
 			let row = this.grid[row_index];
-			rtn += "<div class=\"container\">";
+			rtn += `<div class=\"container\">`;
 			for (let column_index in row) {
+				rtn += `<div class="item">`;
 				let lookupElementNames = row[column_index].split(" ");
 					for(let i in lookupElementNames) {
 						rtn += this.elements.get(lookupElementNames[i])?.output ?? "";
 					}
+				rtn += `</div>`;
 			}
 			rtn += "</div>";
 		}
@@ -128,8 +163,8 @@ class ElementNode implements TreeNode {
 	endswith: string;
 
     constructor() {
-    	this.startswith = `<div class="item">`;
-    	this.endswith = `</div>`;
+    	this.startswith = ``;
+    	this.endswith = ``;
     }
 
     add(json: any) {

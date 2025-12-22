@@ -4,7 +4,7 @@ import { writeFile, readFileSync } from 'fs';
 let layout_file_name = process.argv[2];
 let content_file_name = process.argv[3];
 
-let tree = new HtmlNode(); 
+let tree = new HtmlNode(process.argv[4] ?? "Boring"); 
 
 let layout = JSON.parse(readFileSync(layout_file_name, 'utf8'));
 

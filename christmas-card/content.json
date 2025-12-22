@@ -1,0 +1,32 @@
+[
+	{
+		"type": "heading",
+		"name": "heading",
+		"description": "God jul och ett gott nytt år!"
+	},
+	{
+		"type": "heading",
+		"name": "information",
+		"description": "god jul önskas (NAME)!!! "
+	},
+	{
+		"type": "picture",
+		"name": "dogs",
+		"file": "christmas-card/christmas_dogs.jpeg"
+	},
+	{
+		"type": "picture",
+		"name": "town",
+		"file": "christmas-card/right_town.jpeg"
+	},
+	{
+		"type": "picture",
+		"name": "spruce",
+		"file": "christmas-card/left_christmas_tree.jpeg"
+	},
+	{
+		"type": "information",
+		"name": "footer",
+		"description": "🌟🎄🎁🎄🌟🌟🎄🎁🎄🌟🌟🎄🎁🎄🌟🌟🎄🎁🎄🌟🌟🎄🎁🎄🌟"
+	}
+]
