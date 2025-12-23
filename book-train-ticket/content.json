@@ -1,0 +1,53 @@
+[
+	{
+		"type":"heading",
+		"name": "heading",
+		"description": "Welcome!"
+	},
+	{
+		"type":"information",
+		"name": "information",
+		"description" : "Welcome, book your train tickets here"
+	},
+	{
+		"type":"input_text",
+		"name": "first_name",
+		"description" : "Enter your first name:"
+	},
+	{
+		"type":"input_text",
+		"name": "last_name",
+		"description" : "Enter your last name:"
+	},
+	{
+		"type": "button",
+		"name": "confirm_booking",
+		"description": "confirm booking!",
+		"shows": ["booking_complete", "train_pic", "continue_to_feedback"]
+	},
+	{
+		"type": "information",
+		"name": "booking_complete",
+		"description": "Your booking is complete, thank you!",
+		"visible": "no"
+	},
+	{
+		"type":"picture",
+		"name": "train_pic",
+		"file": "book-train-ticket/train_pic.jpeg",
+		"visible": "no"
+	},
+	{
+		"type": "button",
+		"name": "continue_to_feedback",
+		"description": "Finished, leave feedback",
+		"shows": ["feedback", "continue_to_feedback", "confirm_booking", "information", "first_name", "last_name"],
+		"visible": "no"
+	},
+	{
+		"type":"input_text",
+		"name": "feedback",
+		"description" : "Thank you for your booking, please leave feedback here",
+		"visible": "no"
+	}
+]

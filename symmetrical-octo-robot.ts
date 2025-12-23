@@ -14,20 +14,23 @@ export class HtmlNode implements TreeNode {
 	endswith: string;
 	styleNode: StyleNode;
 	gridNode: GridNode;
+	scriptNode: ScriptNode;
 
 	constructor(style: string) {
 		this.startswith = "<!doctype html><html>";
 		this.endswith = "</html>";
 		this.styleNode = new StyleNode(style);
 		this.gridNode = new GridNode();
+		this.scriptNode = new ScriptNode();
 	}
 
 	get output(): string {
-		return this.startswith + this.styleNode.output + "<body>"+this.gridNode.output+"</body>" + this.endswith;
+		return this.startswith + this.styleNode.output + "<body>"+this.gridNode.output+"</body>" + this.scriptNode.output + this.endswith;
 	}
 
 	add(json: any) {
 		this.gridNode.add(json);
+		this.scriptNode.add(json);
 	}
 
 }
@@ -56,7 +59,15 @@ enum Styles {
 		}
 		body {
 			background-color: rgb(225,220,215);
-		}`,
+		}
+		button {
+			padding: 0.25rem;
+			margin: 1rem;
+		}
+		img {
+			margin: 0.5rem;
+		}`
+	,
 	Kill_Christmas = `* {
  			font-family: 'cursive';
 		}
@@ -80,9 +91,14 @@ enum Styles {
 		}
 		body {
 			background-color: rgb(25,25,25);
-	}`
-
-
+		}
+		button {
+			padding: 0.25rem;
+			margin: 1rem;
+		}
+		img {
+			margin: 0.5rem;
+		}`
 }
 
 class StyleNode implements TreeNode {
@@ -103,6 +119,41 @@ class StyleNode implements TreeNode {
 
 	add(json: any) {
 
+	}
+}
+
+class ScriptNode implements TreeNode {
+	startswith: string;
+	endswith: string;
+
+	constructor() {
+		this.startswith = "<script>";
+		this.endswith = "</script>";
+	}
+
+
+	get output(): string {
+		return this.startswith + this.endswith;
+	}
+
+	add(json: any) {
+		if(!!json.shows) {
+			this.startswith += 'function show_' + json.name + '() { \n';
+		for (let index in json.shows) {
+				let v_name = json.shows[index];
+				this.startswith += `
+				var `+v_name+` = document.getElementById("` + v_name + `");
+  				if (`+v_name+`.style.display === "none") {
+    				`+v_name+`.style.display = "initial";
+  				} else {
+    				`+v_name+`.style.display = "none";
+  				}`
+			}
+			this.startswith += '}';
+		}
+		if(!!json.visible) {
+			this.startswith += `document.getElementById("` + json.name + `").style.display="none";`
+		}
 	}
 }
 
@@ -173,6 +224,10 @@ class ElementNode implements TreeNode {
     			this.contained = new InputTextNode();
     			this.contained.add(json);
     		break;
+    		case ("button") :
+    			this.contained = new ButtonNode();
+    			this.contained.add(json);
+    		break;
     		case ("information") :
     			this.contained = new InformationNode();
     			this.contained.add(json);
@@ -202,24 +257,25 @@ class ElementNode implements TreeNode {
 
 }
 
+
 class InputTextNode implements TreeNode {
 	startswith: string;
 	endswith: string;
 
 
 	constructor() {
-    	this.startswith = `<div><p class="forinput">`;
+    	this.startswith = `<div id=""><p class="forinput">`;
     	this.endswith = `</p><input></div>`;
     }
 
     add(json: any) {
+    	this.startswith = replace_identity(this.startswith, json);
     	this.startswith += json.description;
     }
 
     get output(): string {
     	return this.startswith + this.endswith;
     }
-
 }
 
 
@@ -229,18 +285,18 @@ class InformationNode implements TreeNode {
 
 
 	constructor() {
-    	this.startswith = `<p>`;
+    	this.startswith = `<p id="">`;
     	this.endswith = `</p>`;
     }
 
     add(json: any) {
+    	this.startswith = replace_identity(this.startswith, json);
     	this.startswith += json.description;
     }
 
     get output(): string {
     	return this.startswith + this.endswith;
     }
-
 }
 
 class HeadingNode implements TreeNode {
@@ -260,7 +316,6 @@ class HeadingNode implements TreeNode {
     get output(): string {
     	return this.startswith + this.endswith;
     }
-
 }
 
 class EmptyNode implements TreeNode {
@@ -278,27 +333,53 @@ class EmptyNode implements TreeNode {
     get output(): string {
     	return this.startswith + this.endswith;
     }
-
 }
 
 class PictureNode implements TreeNode {
 	startswith: string;
 	endswith: string;
-	picture_file: string;
+	source: string;
 
 
 	constructor() {
-    	this.startswith = `<img src="`;
-    	this.endswith = `">`;
+    	this.startswith = `<img id=""`;
+    	this.endswith = `>`;
     }
 
     add(json: any) {
-    	this.picture_file = json.file;
+    	this.source = ` src="` + json.file + `" `;
+    	this.startswith = replace_identity(this.startswith, json);
     }
 
     get output(): string {
-    	return this.startswith + this.picture_file + this.endswith;
+    	return this.startswith + this.source + this.endswith;
     }
-
 }
 
+class ButtonNode implements TreeNode {
+	startswith: string;
+	endswith: string;
+
+
+	constructor() {
+    	this.startswith = `<div><button id=""`;
+    	this.endswith = `</button></div>`;
+    }
+
+    add(json: any) {
+    	if(!!json.shows) {
+    		this.startswith += ` onclick="show_` + json.name + `()"`; 
+    	}
+    	this.startswith = replace_identity(this.startswith, json);
+    	this.startswith += ">";
+    	this.startswith += json.description;
+    }
+
+    get output(): string {
+    	return this.startswith + this.endswith;
+    }
+}
+
+function replace_identity(input: string, json: any) : string {
+	return input.replace(`id=""`, `id="`+json.name+`"`);
+}

@@ -1,0 +1,6 @@
+{
+	"type": "layout",
+	"grid": [
+		["", "heading information first_name last_name confirm_booking booking_complete train_pic continue_to_feedback feedback", ""]
+	]
+}
