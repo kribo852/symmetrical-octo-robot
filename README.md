@@ -32,61 +32,59 @@ it takes more effort to keep the same layout through multiple pages, where the c
 The content.json and layout.json files specifies the content and the layout.
 
 Example content json: 
-`
-[
-	{
-		"type":"heading",
-		"name": "heading",
-		"description": "Welcome!"
-	},
-	{
-		"type":"information",
-		"name": "information",
-		"description" : "Welcome, book your train tickets here"
-	},
-	{
-		"type":"input_text",
-		"name": "first_name",
-		"description" : "Enter your first name:"
-	},
-	{
-		"type": "input_date",
-		"name": "departure_date",
-		"description": "When do you want to travel:"
-	},
-	{
-		"type": "radio",
-		"name": "classinfo",
-		"description": "What class would you like",
-		"values": ["first_class", "second_class"]
-	},
-	{
-		"type": "checkbox",
-		"name": "other_options",
-		"description": "What other options would you like",
-		"values": ["non_smoking", "window", "non_window", "pets_allowed", "bistro"]
-	},
-	{
-		"type": "select",
-		"name": "from",
-		"description": "Travel from:",
-		"values": ["Kumla", "Hallsberg", "Örebro", "Vingåker", "Laxå", "Gnesta", "Katrineholm", "Flen", "Kolmården", "Nyköping"]
-	},
-	{
-		"type": "button",
-		"name": "confirm_booking",
-		"description": "confirm booking!",
-		"shows": ["booking_complete", "train_pic", "continue_to_feedback"]
-	},
-	{
-		"type":"picture",
-		"name": "train_pic",
-		"file": "book-train-ticket/train_pic.jpeg",
-		"visible": "no"
-	}
-]
 
-`
+	[
+		{
+			"type":"heading",
+			"name": "heading",
+			"description": "Welcome!"
+		},
+		{
+			"type":"information",
+			"name": "information",
+			"description" : "Welcome, book your train tickets here"
+		},
+		{
+			"type":"input_text",
+			"name": "first_name",
+			"description" : "Enter your first name:"
+		},
+		{
+			"type": "input_date",
+			"name": "departure_date",
+			"description": "When do you want to travel:"
+		},
+		{
+			"type": "radio",
+			"name": "classinfo",
+			"description": "What class would you like",
+			"values": ["first_class", "second_class"]
+		},
+		{
+			"type": "checkbox",
+			"name": "other_options",
+			"description": "What other options would you like",
+			"values": ["non_smoking", "window", "non_window", "pets_allowed", "bistro"]
+		},
+		{
+			"type": "select",
+			"name": "from",
+			"description": "Travel from:",
+			"values": ["Kumla", "Hallsberg", "Örebro", "Vingåker", "Laxå", "Gnesta", "Katrineholm", "Flen", "Kolmården", "Nyköping"]
+		},
+		{
+			"type": "button",
+			"name": "confirm_booking",
+			"description": "confirm booking!",
+			"shows": ["booking_complete", "train_pic", "continue_to_feedback"]
+		},
+		{
+			"type":"picture",
+			"name": "train_pic",
+			"file": "book-train-ticket/train_pic.jpeg",
+			"visible": "no"
+		}
+	]
 
 ### Element types
 - picture, button, select, checkbox, radio, input_date, input_text, information, heading 
