@@ -244,6 +244,19 @@ class ElementNode implements TreeNode {
     			this.contained = new PictureNode();
     			this.contained.add(json);
     		break;
+    		case ("input_date") :
+    			this.contained = new InputDateNode();
+    			this.contained.add(json);
+    		break;
+    		case ("radio") :
+    		case ("checkbox") :
+    			this.contained = new InputRadioCheckboxNode();
+    			this.contained.add(json);
+    		break;
+    		case ("select") :
+    			this.contained = new InputSelectNode();
+    			this.contained.add(json);
+    		break;
     	}
     }
 
@@ -379,6 +392,77 @@ class ButtonNode implements TreeNode {
     	return this.startswith + this.endswith;
     }
 }
+
+class InputDateNode implements TreeNode {
+	startswith: string;
+	endswith: string;
+
+
+	constructor() {
+    	this.startswith = `<div id=""><p class="forinput">`;
+    	this.endswith = `</p><input type="date"></div>`;
+    }
+
+    add(json: any) {
+    	this.startswith = replace_identity(this.startswith, json);
+    	this.startswith += json.description;
+    }
+
+    get output(): string {
+    	return this.startswith + this.endswith;
+    }
+}
+
+class InputRadioCheckboxNode implements TreeNode {
+	startswith: string;
+	endswith: string;
+
+
+	constructor() {
+    	this.startswith = `<div id=""><p class="forinput">`;
+    	this.endswith = `</div>`;
+    }
+
+    add(json: any) {
+    	this.startswith = replace_identity(this.startswith, json);
+    	this.startswith += json.description + `</p>`;
+
+    	for (let index in json.values) {
+    		this.startswith +=  `<div><input type="`+json.type+`" id=`+json.values[index]+` name=`+json.name+`/><label for="`+json.values[index]+`">`+json.values[index]+`</label></div>`;
+    	}
+    }
+
+    get output(): string {
+    	return this.startswith + this.endswith;
+    }
+}
+
+class InputSelectNode implements TreeNode {
+	startswith: string;
+	endswith: string;
+
+
+	constructor() {
+    	this.startswith = `<div id=""><p class="forinput">`;
+    	this.endswith = `</div>`;
+    }
+
+    add(json: any) {
+    	this.startswith = replace_identity(this.startswith, json);
+    	this.startswith += json.description + `</p><select>`;
+
+    	for (let index in json.values) {
+    		this.startswith +=  `<option>`+json.values[index]+`</option>`;
+    	}
+
+    	this.startswith += `</select>`;
+    }
+
+    get output(): string {
+    	return this.startswith + this.endswith;
+    }
+}
+
 
 function replace_identity(input: string, json: any) : string {
 	return input.replace(`id=""`, `id="`+json.name+`"`);

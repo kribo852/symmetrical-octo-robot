@@ -20,6 +20,35 @@
 		"description" : "Enter your last name:"
 	},
 	{
+		"type": "input_date",
+		"name": "departure_date",
+		"description": "When do you want to travel:"
+	},
+	{
+		"type": "radio",
+		"name": "classinfo",
+		"description": "What class would you like",
+		"values": ["first_class", "second_class"]
+	},
+	{
+		"type": "checkbox",
+		"name": "other_options",
+		"description": "What other options would you like",
+		"values": ["non_smoking", "window", "non_window", "pets_allowed", "bistro"]
+	},
+	{
+		"type": "select",
+		"name": "from",
+		"description": "Travel from:",
+		"values": ["Kumla", "Hallsberg", "Örebro", "Vingåker", "Laxå", "Gnesta", "Katrineholm", "Flen", "Kolmården", "Nyköping"]
+	},
+	{
+		"type": "select",
+		"name": "to",
+		"description": "Travel to:",
+		"values": ["Kumla", "Hallsberg", "Örebro", "Vingåker", "Laxå", "Gnesta", "Katrineholm", "Flen", "Kolmården", "Nyköping"]
+	},
+	{
 		"type": "button",
 		"name": "confirm_booking",
 		"description": "confirm booking!",
@@ -41,13 +70,13 @@
 		"type": "button",
 		"name": "continue_to_feedback",
 		"description": "Finished, leave feedback",
-		"shows": ["feedback", "continue_to_feedback", "confirm_booking", "information", "first_name", "last_name"],
+		"shows": ["feedback", "continue_to_feedback", "confirm_booking", "information", "first_name", "last_name", "departure_date", "train_pic", "classinfo", "other_options", "from", "to"],
 		"visible": "no"
 	},
 	{
 		"type":"input_text",
 		"name": "feedback",
-		"description" : "Thank you for your booking, please leave feedback here",
+		"description" : "Thank you for your booking, please leave feedback here:",
 		"visible": "no"
 	}
 ]

@@ -28,7 +28,7 @@
 		}
 		img {
 			margin: 0.5rem;
-		}</style><body><div class="container"><div class="item"></div><div class="item"><h1>Welcome!</h1><p id="information">Welcome, book your train tickets here</p><div id="first_name"><p class="forinput">Enter your first name:</p><input></div><div id="last_name"><p class="forinput">Enter your last name:</p><input></div><div><button id="confirm_booking" onclick="show_confirm_booking()">confirm booking!</button></div><p id="booking_complete">Your booking is complete, thank you!</p><img id="train_pic" src="book-train-ticket/train_pic.jpeg" ><div><button id="continue_to_feedback" onclick="show_continue_to_feedback()">Finished, leave feedback</button></div><div id="feedback"><p class="forinput">Thank you for your booking, please leave feedback here</p><input></div></div><div class="item"></div></div></body><script>function show_confirm_booking() { 
+		}</style><body><div class="container"><div class="item"></div><div class="item"><h1>Welcome!</h1><p id="information">Welcome, book your train tickets here</p><div id="first_name"><p class="forinput">Enter your first name:</p><input></div><div id="last_name"><p class="forinput">Enter your last name:</p><input></div><div id="departure_date"><p class="forinput">When do you want to travel:</p><input type="date"></div><div id="classinfo"><p class="forinput">What class would you like</p><div><input type="radio" id=first_class name=classinfo/><label for="first_class">first_class</label></div><div><input type="radio" id=second_class name=classinfo/><label for="second_class">second_class</label></div></div><div id="other_options"><p class="forinput">What other options would you like</p><div><input type="checkbox" id=non_smoking name=other_options/><label for="non_smoking">non_smoking</label></div><div><input type="checkbox" id=window name=other_options/><label for="window">window</label></div><div><input type="checkbox" id=non_window name=other_options/><label for="non_window">non_window</label></div><div><input type="checkbox" id=pets_allowed name=other_options/><label for="pets_allowed">pets_allowed</label></div><div><input type="checkbox" id=bistro name=other_options/><label for="bistro">bistro</label></div></div><div id="from"><p class="forinput">Travel from:</p><select><option>Kumla</option><option>Hallsberg</option><option>Örebro</option><option>Vingåker</option><option>Laxå</option><option>Gnesta</option><option>Katrineholm</option><option>Flen</option><option>Kolmården</option><option>Nyköping</option></select></div><div id="to"><p class="forinput">Travel to:</p><select><option>Kumla</option><option>Hallsberg</option><option>Örebro</option><option>Vingåker</option><option>Laxå</option><option>Gnesta</option><option>Katrineholm</option><option>Flen</option><option>Kolmården</option><option>Nyköping</option></select></div><div><button id="confirm_booking" onclick="show_confirm_booking()">confirm booking!</button></div><p id="booking_complete">Your booking is complete, thank you!</p><img id="train_pic" src="book-train-ticket/train_pic.jpeg" ><div><button id="continue_to_feedback" onclick="show_continue_to_feedback()">Finished, leave feedback</button></div><div id="feedback"><p class="forinput">Thank you for your booking, please leave feedback here:</p><input></div></div><div class="item"></div></div></body><script>function show_confirm_booking() { 
 
 				var booking_complete = document.getElementById("booking_complete");
   				if (booking_complete.style.display === "none") {
@@ -84,4 +84,40 @@
     				last_name.style.display = "initial";
   				} else {
     				last_name.style.display = "none";
+  				}
+				var departure_date = document.getElementById("departure_date");
+  				if (departure_date.style.display === "none") {
+    				departure_date.style.display = "initial";
+  				} else {
+    				departure_date.style.display = "none";
+  				}
+				var train_pic = document.getElementById("train_pic");
+  				if (train_pic.style.display === "none") {
+    				train_pic.style.display = "initial";
+  				} else {
+    				train_pic.style.display = "none";
+  				}
+				var classinfo = document.getElementById("classinfo");
+  				if (classinfo.style.display === "none") {
+    				classinfo.style.display = "initial";
+  				} else {
+    				classinfo.style.display = "none";
+  				}
+				var other_options = document.getElementById("other_options");
+  				if (other_options.style.display === "none") {
+    				other_options.style.display = "initial";
+  				} else {
+    				other_options.style.display = "none";
+  				}
+				var from = document.getElementById("from");
+  				if (from.style.display === "none") {
+    				from.style.display = "initial";
+  				} else {
+    				from.style.display = "none";
+  				}
+				var to = document.getElementById("to");
+  				if (to.style.display === "none") {
+    				to.style.display = "initial";
+  				} else {
+    				to.style.display = "none";
   				}}document.getElementById("continue_to_feedback").style.display="none";document.getElementById("feedback").style.display="none";</script></html>
