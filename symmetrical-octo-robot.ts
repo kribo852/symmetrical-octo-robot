@@ -1,5 +1,6 @@
+import { Styles } from './styles.js'
 
-export interface TreeNode {
+interface TreeNode {
 	startswith: string;
 	endswith: string;
 
@@ -33,72 +34,6 @@ export class HtmlNode implements TreeNode {
 		this.scriptNode.add(json);
 	}
 
-}
-
-enum Styles {
-	Boring =  `* {
- 			font-family: 'sans-serif';
-		}
-		.container { 
-			display: flex;
-			height: auto;
-		}
-		div.item {
-			width: 100%;
-			background-color: rgb(215,215,255);
-			border-right: 1px solid grey;
-			border-bottom: 1px solid grey;
-			text-align: center;
-		}
-		p.forinput{
-			margin-top:1rem;
-			margin-bottom:2px;
-		}
-		input {
-			margin-bottom:1rem;
-		}
-		body {
-			background-color: rgb(225,220,215);
-		}
-		button {
-			padding: 0.25rem;
-			margin: 1rem;
-		}
-		img {
-			margin: 0.5rem;
-		}`
-	,
-	Kill_Christmas = `* {
- 			font-family: 'cursive';
-		}
-		.container { 
-			display: flex;
-			height: auto;
-		}
-		div.item {
-			width: 100%;
-			background-color: rgb(175,50,50);
-			border-right: 1px solid grey;
-			border-bottom: 1px solid grey;
-			text-align: center;
-		}
-		p.forinput{
-			margin-top:1rem;
-			margin-bottom:2px;
-		}
-		input {
-			margin-bottom:1rem;
-		}
-		body {
-			background-color: rgb(25,25,25);
-		}
-		button {
-			padding: 0.25rem;
-			margin: 1rem;
-		}
-		img {
-			margin: 0.5rem;
-		}`
 }
 
 class StyleNode implements TreeNode {

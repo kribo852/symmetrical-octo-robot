@@ -1,0 +1,6 @@
+{
+	"type": "layout",
+	"grid": [
+		["forest1", "heading information info_sortiment sortiment info_home_delivery home_delivery footer", "forest2"]
+	]
+}

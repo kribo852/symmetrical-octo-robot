@@ -1,0 +1,47 @@
+[
+	{
+		"type": "heading",
+		"name": "heading",
+		"description": "Buy spicy mushrooms from near and afar!"
+	},
+	{
+		"type": "information",
+		"name": "information",
+		"description": "Buy really spicy mushroom, our prices are unbeatable, over and underground!"
+	},
+	{
+		"type": "information",
+		"name": "info_sortiment",
+		"description": "take a look at our sortiment:" 
+	},
+	{
+		"type": "picture",
+		"name": "sortiment",
+		"file": "spicy-mushrooms/mushrooms.jpeg"
+	},
+	{
+		"type": "information",
+		"name": "info_home_delivery",
+		"description": "Do you want a home delivery? Right now, if you order our special secret surprise space package, you will get a free home delivery!" 
+	},
+	{
+		"type": "picture",
+		"name": "home_delivery",
+		"file": "spicy-mushrooms/home_delivery.jpeg"
+	},
+	{
+		"type": "picture",
+		"name": "forest1",
+		"file": "spicy-mushrooms/forest1.jpeg"
+	},
+	{
+		"type": "picture",
+		"name": "forest2",
+		"file": "spicy-mushrooms/forest2.jpeg"
+	},
+	{
+		"type": "information",
+		"name": "footer",
+		"description": "Other crazy offers here, or call +5436 1122334455678912367543345435243267"
+	}
+]

@@ -1,4 +1,4 @@
-import {TreeNode, HtmlNode} from './symmetrical-octo-robot.js'
+import { HtmlNode } from './symmetrical-octo-robot.js'
 import { writeFile, readFileSync } from 'fs';
 
 let layout_file_name = process.argv[2];
