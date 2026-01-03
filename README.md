@@ -65,7 +65,7 @@ Example content json:
 			"type": "checkbox",
 			"name": "other_options",
 			"description": "What other options would you like",
-			"values": ["non_smoking", "window", "non_window", "pets_allowed", "bistro"]
+			"values": ["non_smoking", "window", "aisle", "pets_allowed", "bistro"]
 		},
 		{
 			"type": "select",
