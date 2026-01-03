@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile-source": "tsc src/run-robot.ts --outDir build",
     "create-html-page": "node build/run-robot.js book-train-ticket/layout.json book-train-ticket/content.json",
-    "beautify": "node beautify.js"
+    "beautify": "node src/beautify.js"
   },
   "author": "kribo",
   "license": "MIT",
