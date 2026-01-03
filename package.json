@@ -5,8 +5,8 @@
   "main": "run-robot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile-source": "tsc run-robot.ts",
-    "create-html-page": "node run-robot.js book-train-ticket/layout.json book-train-ticket/content.json",
+    "compile-source": "tsc src/run-robot.ts --outDir build",
+    "create-html-page": "node build/run-robot.js book-train-ticket/layout.json book-train-ticket/content.json",
     "beautify": "node beautify.js"
   },
   "author": "kribo",

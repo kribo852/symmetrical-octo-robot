@@ -1,6 +1,3 @@
 /node_modules/
+/build/
 structure.pu
-run-robot.js
-symmetrical-octo-robot.js
-styles.js
-
