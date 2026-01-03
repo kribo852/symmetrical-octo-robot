@@ -290,8 +290,8 @@ class PictureNode implements TreeNode {
 
 
 	constructor() {
-    	this.startswith = `<img id=""`;
-    	this.endswith = `>`;
+    	this.startswith = `<div><img id=""`;
+    	this.endswith = `></div>`;
     }
 
     add(json: any) {
