@@ -1,10 +1,4 @@
 const default_style = `
-* {
-	font-size: 1rem;
-}
-h1 {
-	font-size: 2rem;
-}
 button {
 	padding: 0.25rem;
 	margin: 1rem;
@@ -18,8 +12,8 @@ p.forinput{
 		margin-top:1rem;
 		margin-bottom:2px;
 }
-input {
-	margin-bottom:1rem;
+input[type=text] {
+	margin: 1rem;
 }
 .container { 
 	display: flex;
@@ -30,7 +24,6 @@ div.item {
 }
 
 `
-
 
 export enum Styles {
 	Boring = default_style + `* {

@@ -1,10 +1,4 @@
-<!doctype html><html><style>
-* {
-	font-size: 1rem;
-}
-h1 {
-	font-size: 2rem;
-}
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"><style>
 button {
 	padding: 0.25rem;
 	margin: 1rem;
@@ -18,8 +12,8 @@ p.forinput{
 		margin-top:1rem;
 		margin-bottom:2px;
 }
-input {
-	margin-bottom:1rem;
+input[type=text] {
+	margin: 1rem;
 }
 .container { 
 	display: flex;
@@ -39,7 +33,7 @@ div.item {
 	background-color: rgb(215,215,255);
 	border-right: 1px solid grey;
 	border-bottom: 1px solid grey;
-}</style><body><div class="container"><div class="item"></div><div class="item"><h1>Welcome!</h1><p id="information">Welcome, book your train tickets here</p><div id="first_name"><p class="forinput">Enter your first name:</p><input></div><div id="last_name"><p class="forinput">Enter your last name:</p><input></div><div id="departure_date"><p class="forinput">When do you want to travel:</p><input type="date"></div><div id="classinfo"><p class="forinput">What class would you like</p><div><input type="radio" id=first_class name=classinfo/><label for="first_class">first_class</label></div><div><input type="radio" id=second_class name=classinfo/><label for="second_class">second_class</label></div></div><div id="other_options"><p class="forinput">What other options would you like</p><div><input type="checkbox" id=non_smoking name=other_options/><label for="non_smoking">non_smoking</label></div><div><input type="checkbox" id=window name=other_options/><label for="window">window</label></div><div><input type="checkbox" id=aisle name=other_options/><label for="aisle">aisle</label></div><div><input type="checkbox" id=pets_allowed name=other_options/><label for="pets_allowed">pets_allowed</label></div><div><input type="checkbox" id=bistro name=other_options/><label for="bistro">bistro</label></div></div><div id="from"><p class="forinput">Travel from:</p><select><option>Kumla</option><option>Hallsberg</option><option>Örebro</option><option>Vingåker</option><option>Laxå</option><option>Gnesta</option><option>Katrineholm</option><option>Flen</option><option>Kolmården</option><option>Nyköping</option></select></div><div id="to"><p class="forinput">Travel to:</p><select><option>Kumla</option><option>Hallsberg</option><option>Örebro</option><option>Vingåker</option><option>Laxå</option><option>Gnesta</option><option>Katrineholm</option><option>Flen</option><option>Kolmården</option><option>Nyköping</option></select></div><div><button id="confirm_booking" onclick="show_confirm_booking()">confirm booking!</button></div><p id="booking_complete">Your booking is complete, thank you!</p><div><img id="train_pic" src="book-train-ticket/train_pic.jpeg" ></div><div><button id="continue_to_feedback" onclick="show_continue_to_feedback()">Finished, leave feedback</button></div><div id="feedback"><p class="forinput">Thank you for your booking, please leave feedback here:</p><input></div></div><div class="item"></div></div></body><script>function show_confirm_booking() { 
+}</style></head><body><div class="container"><div class="item"><h1>Welcome!</h1><p id="information">Welcome, book your train tickets here</p><div id="first_name"><p class="forinput">Enter your first name:</p><input type="text"></div><div id="last_name"><p class="forinput">Enter your last name:</p><input type="text"></div><div id="departure_date"><p class="forinput">When do you want to travel:</p><input type="date"></div><div id="classinfo"><p class="forinput">What class would you like</p><div><input type="radio" id=first_class name=classinfo/><label for="first_class">first_class</label></div><div><input type="radio" id=second_class name=classinfo/><label for="second_class">second_class</label></div></div><div id="other_options"><p class="forinput">What other options would you like</p><div><input type="checkbox" id=non_smoking name=other_options/><label for="non_smoking">non_smoking</label></div><div><input type="checkbox" id=window name=other_options/><label for="window">window</label></div><div><input type="checkbox" id=aisle name=other_options/><label for="aisle">aisle</label></div><div><input type="checkbox" id=pets_allowed name=other_options/><label for="pets_allowed">pets_allowed</label></div><div><input type="checkbox" id=bistro name=other_options/><label for="bistro">bistro</label></div></div><div id="from"><p class="forinput">Travel from:</p><select><option>Kumla</option><option>Hallsberg</option><option>Örebro</option><option>Vingåker</option><option>Laxå</option><option>Gnesta</option><option>Katrineholm</option><option>Flen</option><option>Kolmården</option><option>Nyköping</option></select></div><div id="to"><p class="forinput">Travel to:</p><select><option>Kumla</option><option>Hallsberg</option><option>Örebro</option><option>Vingåker</option><option>Laxå</option><option>Gnesta</option><option>Katrineholm</option><option>Flen</option><option>Kolmården</option><option>Nyköping</option></select></div><div><button id="confirm_booking" onclick="show_confirm_booking()">confirm booking!</button></div><p id="booking_complete">Your booking is complete, thank you!</p><div><img id="train_pic" src="book-train-ticket/train_pic.jpeg" ></div><div><button id="continue_to_feedback" onclick="show_continue_to_feedback()">Finished, leave feedback</button></div><div id="feedback"><p class="forinput">Thank you for your booking, please leave feedback here:</p><input type="text"></div></div></div></body><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script><script>function show_confirm_booking() { 
 
 				var booking_complete = document.getElementById("booking_complete");
   				if (booking_complete.style.display === "none") {
