@@ -18,7 +18,7 @@ export class HtmlNode implements TreeNode {
 	scriptNode: ScriptNode;
 
 	constructor(style: string) {
-		this.startswith = "<!doctype html><html>";
+		this.startswith = "<!doctype html><html lang=\"en\"><title>Prototype</title>";
 		this.endswith = "</html>";
 		this.styleNode = new StyleNode(style);
 		this.gridNode = new GridNode();
