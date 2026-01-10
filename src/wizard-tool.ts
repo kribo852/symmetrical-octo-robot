@@ -25,6 +25,14 @@ function run_wizzard() {
 			case "input_date":
 				output_json.push(add_initial_visibility(add_property("description", add_property("name", object))));
 			break;
+			case "button":
+				output_json.push(add_multi_values("shows" , (add_initial_visibility(add_property("description", add_property("name", object))))));
+			break;
+			case "select":
+			case "radio":
+			case "checkbox":	
+				output_json.push(add_multi_values("values" , (add_initial_visibility(add_property("description", add_property("name", object))))));
+			break;
 			case "output":
 				output_to_file(make_layout(output_json), output_json);
 			break;
@@ -78,6 +86,19 @@ function make_layout(content) {
 		layout.grid[0][0]+= content[index].name + " ";
 	}
 	return layout;
+}
+
+function add_multi_values(property_name: string, object) {
+	object[property_name] = [];
+	while(true) {
+		const value = _prompt("Enter value for the property " + property_name + " or empty to return");
+		if(value) {
+			object[property_name].push(value);
+		} else {
+			break;
+		}
+	}
+	return object;
 }
 
 run_wizzard();
