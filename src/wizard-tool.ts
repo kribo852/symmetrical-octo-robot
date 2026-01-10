@@ -7,8 +7,8 @@ function run_wizzard() {
 	let output_json = [];
 	
 	while(true) {
-		console.log("Actions: <heading> <information> <input_text> <input_date> <picture> \n <select> <checkbox> <radio> <button> <output>");
-		const action = _prompt("Select an action ");
+		console.log("Actions: <heading> <information> <input_text> <input_date> <picture> \n <select> <checkbox> <radio> <button> <output> <erase> <exit>");
+		const action = _prompt("Select an action ", {autocomplete: complete(['heading', 'information', 'input_text', 'input_date', 'picture', 'select', 'checkbox', 'radio', 'button', 'output', 'erase', 'exit'])});
 
 		if(action == "exit") {
 			break;
@@ -36,6 +36,13 @@ function run_wizzard() {
 			case "output":
 				output_to_file(make_layout(output_json), output_json);
 			break;
+			case "picture":
+				output_json.push(add_property("file", add_initial_visibility(add_property("description", add_property("name", object)))));
+			break;
+			case "erase":
+				if(output_json.length > 0) {
+					output_json.pop();
+				}
 		}
 		console.log(output_json);
 	}
@@ -100,5 +107,17 @@ function add_multi_values(property_name: string, object) {
 	}
 	return object;
 }
+
+function complete(commands) {
+    return function (str) {
+      var i;
+      var ret = [];
+      for (i=0; i< commands.length; i++) {
+        if (commands[i].indexOf(str) == 0)
+          ret.push(commands[i]);
+      }
+      return ret;
+    };
+};
 
 run_wizzard();
