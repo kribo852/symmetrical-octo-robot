@@ -8,12 +8,16 @@ img {
 	max-width: calc(100% - 1rem);
 	max-height:calc(100% - 1rem);
 }
-p.forinput{
+.forinput{
 		margin-top:1rem;
 		margin-bottom:2px;
+		width: 100%;
 }
-input[type=text] {
-	margin: 1rem;
+input[type=text],input[type=date],select {
+	margin-bottom: 1rem;
+	display: block;
+	margin-left: auto;
+  	margin-right: auto;
 }
 .container { 
 	display: flex;
@@ -57,7 +61,7 @@ div.item {
 	border-bottom: 1px solid darkgreen;
 }
 body {
-	background-image: linear-gradient(rgb(0,35,60), rgb(15,50,35), rgb(0,35,60));
+	background-image: linear-gradient(rgb(15,15,15), rgb(15,50,35), rgb(15,15,15));
 }
 input {
 	background-color: darkgreen;

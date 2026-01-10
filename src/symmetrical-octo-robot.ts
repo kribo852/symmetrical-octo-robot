@@ -215,8 +215,8 @@ class InputTextNode implements TreeNode {
 
 
 	constructor() {
-    	this.startswith = `<div id=""><p class="forinput">`;
-    	this.endswith = `</p><input type="text"></div>`;
+    	this.startswith = `<div id=""><label class="forinput">`;
+    	this.endswith = `<input type="text"></label></div>`;
     }
 
     add(json: any) {
@@ -337,8 +337,8 @@ class InputDateNode implements TreeNode {
 
 
 	constructor() {
-    	this.startswith = `<div id=""><p class="forinput">`;
-    	this.endswith = `</p><input type="date"></div>`;
+    	this.startswith = `<div id=""><label class="forinput">`;
+    	this.endswith = `<input type="date"></label></div>`;
     }
 
     add(json: any) {
@@ -381,19 +381,19 @@ class InputSelectNode implements TreeNode {
 
 
 	constructor() {
-    	this.startswith = `<div id=""><p class="forinput">`;
+    	this.startswith = `<div id=""><label class="forinput">`;
     	this.endswith = `</div>`;
     }
 
     add(json: any) {
     	this.startswith = replace_identity(this.startswith, json);
-    	this.startswith += json.description + `</p><select>`;
+    	this.startswith += json.description + `<select>`;
 
     	for (let index in json.values) {
     		this.startswith +=  `<option>`+json.values[index]+`</option>`;
     	}
 
-    	this.startswith += `</select>`;
+    	this.startswith += `</select></label>`;
     }
 
     get output(): string {
