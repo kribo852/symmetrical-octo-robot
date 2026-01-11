@@ -22,10 +22,10 @@
 
 ### The input specification
 
-The input specification (layout.json and content.json) are two json files. This is because json is easy to handle in Typescript. It might be possible to build a more concise specification that gets transformed into the json format  
-or even a gui to make it easier for non-technical personel to use the prototype tool.  
-The layout json object specifies the layout of elements in the prototype. The layout specifies where elements are to be inserted in the prototype.  
-This is done by placing the name of an element in a place in the layout. The content json objects specifies individual elements by name, type and description.
+The input specification (layout.json and content.json) are two json files. This is because json is easy to handle in Typescript.  
+It might be possible to build a more concise specification that gets transformed into the json format or even build a gui to make it easier for non-technical personel to use the prototype tool.  
+The layout json object specifies the layout of elements in the prototype.  
+This is done by placing the name of an element in a position in the layout grid. The content json objects specifies individual elements by name, type and description.
 
 By letting the layout and the element definitions (content) of the page be separate, and the layout reference the content elements instead of the elements referencing the layout,  
 it becomes easy to change the layout while keeping the content. On the other hand, 
@@ -88,18 +88,6 @@ Example content json:
 		}
 	]
 
-#### Layout
-
-Example layout json:
-
-    {
-        "type": "layout"
-        "grid": [["", "heading", ""],["information"],["button1 button2 button3"], ["confirm"]]
-    }
-
-The layout has a list of lists structure. Each element in the list represents a row in the web page.
-Inside the list element, a number of strings represent the columns of that row. Therefore, different rows can have different numbers of columns. Empty strings in this structure represent an empty cell in that row. Finally, content separated with a space, in a string, means that these content will be shown in the same cell, following each other. 
-
 #### Element types
 - picture, button, select, checkbox, radio, input_date, input_text, information, heading  
 
@@ -108,7 +96,20 @@ Inside the list element, a number of strings represent the columns of that row. 
 - description: used as a descriptive text of the element
 - shows: for buttons, this list tells the names of elements which are shown/hidden when the button is clicked
 - visible: the initial state of visibility, for all elements except the heading. Hidden elements can be shown by clicking a configured button.
-- values: a list of allowed values, for select-boxes, radio-butons and checkboxes.  
+- values: a list of allowed values, for select-boxes, radio-butons and checkboxes.
+
+#### Layout
+
+Example layout json:
+
+    {
+        "type": "layout"
+        "grid": [["", "heading", ""],["information"],["button1 button2 button3"], ["confirm_booking"]]
+    }
+
+The layout has a list of lists structure. Each element in the list represents a row in the web page.
+Inside the list element, a number of strings represent the columns of that row. Therefore, different rows can have different numbers of columns. Empty strings in this structure represent an empty cell in that row. Finally, content separated with a space, in a string, means that these content elements will be shown in the same cell, following each other. Elements in the content.json are referred to via their names in the layout.
+
 
 ### Styles
 There are some predefined styles you can use. The style is an argument in the package.json. For example npm run create-html-page Mystical_forrest, (Mystical_forest is the style). Its a bit akward, 
@@ -116,12 +117,14 @@ but currently you have to change the style in package.json yourself. The styles 
 
 
 ### Examples
-Small examples for generating web prototypes can be found in the folders: car-sales, christmas-card, and book-train-ticket, spicy-mushrooms.
+Small examples for generating web prototypes can be found in the folders: car-sales, christmas-card, book-train-ticket and spicy-mushrooms.
 
 ### The wizard
 
-The wizard is a typescript program that helps the user input elements into the prototype sequentially. 
-The wizard is run from the terminal. It produces simple one-column prototypes.
+The wizard is a typescript program that helps the user place elements into the prototype sequentially.
+It is an alternative to the npm command "create-html-page", that sets up the json structure in real time, instead of reading it from files.  
+The wizard is run from the terminal. It produces simple one-column prototypes. After the user is done, an html prototype can be exported.  
+
 
 ## Notes
 
